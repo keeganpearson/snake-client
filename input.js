@@ -36,6 +36,24 @@ const setupInput = function (conn) {
     if (key === 'd') {
       connection.write("Move: right");
     }
+
+    // key 1 = message 1
+    if (key === 'j') {
+      // Send "Say: Hello everyone!" message to the server
+      connection.write("Say: I'm gonna win!");
+    }
+
+    // key 2 = message 2
+    if (key === 'k') {
+      // Send "Say: Good game!" message to the server
+      connection.write("Say: You don't stand a chance!");
+    }
+
+    // key 3 = message 3
+    if (key === 'l') {
+      // Send "Say: Nice move!" message to the server
+      connection.write("Say: Dang it.");
+    }
   };
 
   // register event listener
