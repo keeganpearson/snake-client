@@ -15,4 +15,4 @@ conn.on("data", (data) => {
 console.log("Connecting ...");
 
 // call 
-setupInput();
+setupInput(conn);
