@@ -1,64 +1,45 @@
 // store active TCP connection object
 let connection;
 
-// setup interface to handle user input from stdin
-const setupInput = function (conn) {
-  // assig passed connection object to out scope 'connection' variable
+// input keys and their commands
+const commands = {
+  'w': "Move: up",
+  'a': "Move: left",
+  's': "Move: down",
+  'd': "Move: right",
+  'j': "Say: I'm gonna win!",
+  'k': "Say: You don't stand a chance!",
+  'l': "Say: Dang it."
+};
+
+// Function to setup input from stdin
+const setupInput = (conn) => {
+  // Assigning passed connection object to the 'connection' variable
   connection = conn;
 
+  // Configuring stdin
   const stdin = process.stdin;
   stdin.setRawMode(true);
   stdin.setEncoding("utf8");
   stdin.resume();
 
-  const handleUserInput = function (key) {
-    // Ctrl C, exit the process
+  // Function to handle user input
+  const handleUserInput = (key) => {
+    // If key is Ctrl+C, exit the process
     if (key === '\u0003') {
       process.exit();
     }
 
-    // w = "Move: up"
-    if (key === 'w') {
-      connection.write("Move: up");
-    }
-
-    // a = "Move: left"
-    if (key === 'a') {
-      connection.write("Move: left");
-    }
-
-    // s = "Move: down"
-    if (key === 's') {
-      connection.write("Move: down");
-    }
-
-    // d = "Move: right"
-    if (key === 'd') {
-      connection.write("Move: right");
-    }
-
-    // key 1 = message 1
-    if (key === 'j') {
-      // Send "Say: Hello everyone!" message to the server
-      connection.write("Say: I'm gonna win!");
-    }
-
-    // key 2 = message 2
-    if (key === 'k') {
-      // Send "Say: Good game!" message to the server
-      connection.write("Say: You don't stand a chance!");
-    }
-
-    // key 3 = message 3
-    if (key === 'l') {
-      // Send "Say: Nice move!" message to the server
-      connection.write("Say: Dang it.");
+    // If key is in the commands object, write the corresponding command to the connection
+    if (commands[key]) {
+      connection.write(commands[key]);
     }
   };
-
+    
   // register event listener
   stdin.on("data", handleUserInput);
 
+  // return stdin
   return stdin;
 };
 
