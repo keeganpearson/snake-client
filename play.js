@@ -1,4 +1,4 @@
-const net = require("net");
+// import modules
 const connect = require("./client");
 const setupInput = require("./input");
 
@@ -8,10 +8,10 @@ const conn = connect();
 // interpret incoming data as text
 conn.setEncoding("utf8");
 
-conn.on("data", (data) => {
-  console.log('Server says: ', data);
-});
+// register data event handler
+conn.on("data", data => console.log('Server says: ', data));
 
+// log connection message
 console.log("Connecting ...");
 
 // call 
