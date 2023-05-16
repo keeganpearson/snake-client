@@ -1,11 +1,9 @@
 const net = require("net");
 const { IP, PORT } = require("./constants");
 
-const connect = function () {
-  const conn = net.createConnection({
-    host: IP, 
-    port: PORT, 
-  });
+// create and return connection
+const connect = () => {
+  const conn = net.createConnection({ host: IP, port: PORT });
 
   // Register the "connect" event handler
   conn.on('connect', () => {
@@ -15,6 +13,7 @@ const connect = function () {
     conn.write("Name: XYZ");
   });
 
+  // return connection
   return conn;
 };
 
